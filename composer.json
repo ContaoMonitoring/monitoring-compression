@@ -1,0 +1,35 @@
+{
+	"name":"contao-monitoring/monitoring-test-compression",
+	"description":"Provides components to compress the test results for the Contao Monitoring system.",
+	"keywords":["contao", "monitoring", "compress", "compression", "test result"],
+	"type":"contao-module",
+	"license":"LGPL-3.0+",
+	"authors":[
+		{
+			"name":"Cliff Parnitzky",
+			"email":"contao@cliff-parnitzky.de",
+			"role":"Developer"
+		}
+	],
+	"support":{
+		"email":"contao@cliff-parnitzky.de",
+		"issues":"https://github.com/ContaoMonitoring/monitoring-test-compression/issues",
+		"source":"https://github.com/ContaoMonitoring/monitoring-test-compression"
+	},
+	"require":{
+		"php":">=5.3",
+		"contao/core":">=3.0.0,<4.0.0-dev",
+		"contao-community-alliance/composer-installer":"*",
+		"contao-monitoring/monitoring":">=1.6.0"
+	},
+	"extra":{
+		"contao":{
+			"sources":{
+				"system/modules/MonitoringTestCompression":"system/modules/MonitoringTestCompression"
+			}
+		},
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
+	}
+}
