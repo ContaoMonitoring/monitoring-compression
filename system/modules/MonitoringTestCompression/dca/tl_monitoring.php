@@ -45,4 +45,22 @@ array_insert($GLOBALS['TL_DCA']['tl_monitoring']['list']['global_operations'], c
     )
 ));
 
+/**
+ * Add to palette
+ */
+$GLOBALS['TL_DCA']['tl_monitoring']['palettes']['default'] .= ";{compression_legend},disable_auto_compression";
+
+/**
+ * Add fields
+ */
+$GLOBALS['TL_DCA']['tl_monitoring']['fields']['disable_auto_compression'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_monitoring']['disable_auto_compression'],
+    'exclude'                 => true,
+	'filter'                  => true,
+	'inputType'               => 'checkbox',
+    'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+
 ?>

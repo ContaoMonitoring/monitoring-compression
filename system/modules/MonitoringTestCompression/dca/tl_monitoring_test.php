@@ -1,5 +1,6 @@
 <?php
 
+use Monitoring\MonitoringTestCompressor;
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2014 Leo Feyer
@@ -44,5 +45,27 @@ array_insert($GLOBALS['TL_DCA']['tl_monitoring_test']['list']['global_operations
         'class' => 'header_icon tl_monitoring_test_compress'
     )
 ));
+
+/**
+ * Add to palette
+ */
+$GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default'] .= ";{compression_legend},compression_type";
+
+/**
+ * Add fields
+ */
+$GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['compression_type'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'],
+    'exclude'                 => true,
+    'filter'                  => true,
+    'sorting'                 => true,
+    'inputType'               => 'select',
+    'default'                 => MonitoringTestCompressor::COMPRESSION_NONE,
+	'options'                 => array(MonitoringTestCompressor::COMPRESSION_NONE, MonitoringTestCompressor::COMPRESSION_DAY, MonitoringTestCompressor::COMPRESSION_MONTH),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'],
+	'eval'                    => array('tl_class'=>'w50', 'readonly'=>true, 'helpwizard'=>true),
+	'sql'                     => "varchar(16) NOT NULL default '" . MonitoringTestCompressor::COMPRESSION_NONE . "'"
+);
 
 ?>

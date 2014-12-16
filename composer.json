@@ -20,7 +20,7 @@
 		"php":">=5.3",
 		"contao/core":">=3.0.0,<4.0.0-dev",
 		"contao-community-alliance/composer-installer":"*",
-		"contao-monitoring/monitoring":">=1.6.0"
+		"contao-monitoring/monitoring":">=1.7.0"
 	},
 	"extra":{
 		"contao":{

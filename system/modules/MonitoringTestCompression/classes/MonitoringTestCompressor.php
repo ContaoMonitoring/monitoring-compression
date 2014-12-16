@@ -43,6 +43,10 @@ use Contao\Database;
  */
 class MonitoringTestCompressor extends \Backend
 {
+    const COMPRESSION_NONE  = '';
+    const COMPRESSION_DAY   = 'INCOMPLETE';
+    const COMPRESSION_MONTH = 'ERROR';
+
 	/**
 	 * Constructor
 	 */
@@ -59,7 +63,7 @@ class MonitoringTestCompressor extends \Backend
 	    // ToDo: execute cempression here
 	    $time = time();
 	    $lastDay = mktime(0, 0, 0, date("m", $time), date("d", $time) - 1, date("Y", $time));
-	    $this->compressDay($lastDay, \Input::get('id'));
+	    $this->compressDay($lastDay, \Input::get('id'), false);
 
 	    \Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['monitoringCompressedOne']);
 	    $this->logDebugMsg("Compressed the test results of monitoring entry with ID " . \Input::get('id'), __METHOD__);
@@ -119,8 +123,9 @@ class MonitoringTestCompressor extends \Backend
 	 *
 	 * @param $tstampStartOfMonth The timestamp of the start of the month.
 	 * @param $intEntryId The id of a monitoring entry (if null, the test results of all entries will be compressed).
+	 * @param $blnIsAutoExecuted Specifies whether the method is triggered by an automatic process (e.g. CRON).
 	 */
-	private function compressMonth($tstampStartOfMonth, $intEntryId=null)
+	private function compressMonth($tstampStartOfMonth, $intEntryId=null, $blnIsAutoExecuted=true)
 	{
 	    $dayCountOfMonth = date("t", $tstampStartOfMonth);
 
@@ -139,12 +144,14 @@ class MonitoringTestCompressor extends \Backend
 
 	    foreach ($arrEntryIds as $entryId)
 	    {
+	        // if 'disable_auto_compression' of entry is set and $blnIsAutoExecuted is true ... do not compress
+
 	        // at first compress the days
 
 	        $tstampStartOfDay = $tstampStartOfMonth;
 	        for ($i = 0; $i < $dayCountOfMonth; $i++)
 	        {
-	           $this->compressDay($tstampStartOfDay, $entryId);
+	           $this->compressDay($tstampStartOfDay, $entryId, $blnIsScheduled);
 	           $tstampStartOfDay = $this->addOneDay($tstampStartOfDay);
 	        }
 
@@ -160,8 +167,9 @@ class MonitoringTestCompressor extends \Backend
 	 *
 	 * @param $tstampStartOfDay The timestamp of the day.
 	 * @param $intEntryId The id of a monitoring entry (if null, the test results of all entries will be compressed).
+	 * @param $blnIsAutoExecuted Specifies whether the method is triggered by an automatic process (e.g. CRON).
 	 */
-	private function compressDay($tstampStartOfDay, $intEntryId=null)
+	private function compressDay($tstampStartOfDay, $intEntryId=null, $blnIsAutoExecuted=true)
 	{
 	    $arrEntryIds = array();
 
@@ -178,6 +186,8 @@ class MonitoringTestCompressor extends \Backend
 	    {
 	        $objTest = Database::getInstance()->prepare("SELECT * FROM tl_monitoring_test WHERE date >= ? AND date < ? AND type = ? AND pid = ? ORDER BY date")
 	        ->execute($tstampStartOfDay, $this->addOneDay($tstampStartOfDay), Monitoring::CHECK_TYPE_AUTOMATIC, $entryId);
+
+	        // if 'disable_auto_compression' of entry is set and $blnIsAutoExecuted is true ... do not compress
 
 	        // do the compression here
 

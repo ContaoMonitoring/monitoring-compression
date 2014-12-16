@@ -1,5 +1,6 @@
 <?php
 
+use Monitoring\MonitoringTestCompressor;
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2014 Leo Feyer
@@ -30,19 +31,19 @@
 /**
  * Fields
  */
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['date']            = array('Datum', 'Der Zeitpunkt der Durchführung dieses Tests.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'] = array('Kompressionsart', 'Die Art der Kompression dieses Testergebnisses.');
 
 /**
  * Legends
  */
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['result_legend']  = 'Testergebnis';
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_legend'] = 'Kompression';
 
 /**
  * References
  */
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['statusTypes'][Monitoring::STATUS_OKAY]       = array('Okay', 'Der Webserver ist erreichbar und der Teststring wurde erfolgreich geprüft.');
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['statusTypes'][Monitoring::STATUS_INCOMPLETE] = array('Unvollständig', 'Der Webserver ist erreichbar aber der Teststring konnte nicht erfolgreich geprüft werden.');
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['statusTypes'][Monitoring::STATUS_ERROR]      = array('Fehler', 'Der Webserver ist nicht erreichbar.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringTestCompressor::COMPRESSION_NONE]  = array('Keine', 'Das Testergebnis ist nicht komprimiert, es gilt nur für den Testzeitpunkt.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringTestCompressor::COMPRESSION_DAY]   = array('Tag', 'Das Testergebnis fasst alle Tests eines Tages zusammen.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringTestCompressor::COMPRESSION_MONTH] = array('Monat', 'Das Testergebnis fasst alle Tests eines Monats zusammen.');
 
 /**
  * Buttons

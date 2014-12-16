@@ -26,5 +26,6 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'Monitoring\MonitoringTestCompressor' => 'system/modules/MonitoringTestCompression/classes/MonitoringTestCompressor.php',
+	'Monitoring\MonitoringTestCompressionImpl' => 'system/modules/MonitoringTestCompression/classes/MonitoringTestCompressionImpl.php',
+	'Monitoring\MonitoringTestCompressor'      => 'system/modules/MonitoringTestCompression/classes/MonitoringTestCompressor.php',
 ));

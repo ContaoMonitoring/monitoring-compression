@@ -30,19 +30,19 @@
 /**
  * Fields
  */
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['date']            = array('Date', 'The date of the execution out this test.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'] = array('Compression type', 'The type of compression of this test result.');
 
 /**
  * Legends
  */
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['result_legend']  = 'Test result';
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_legend'] = 'Compression';
 
 /**
  * References
  */
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['statusTypes'][Monitoring::STATUS_OKAY]       = array('Okay', 'The Webserver is available and the test string could be checked successfully.');
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['statusTypes'][Monitoring::STATUS_INCOMPLETE] = array('Incomplete', 'The webserver is available but the test string could not be checked successfully.');
-//$GLOBALS['TL_LANG']['tl_monitoring_test']['statusTypes'][Monitoring::STATUS_ERROR]      = array('Error', 'The webserver is not available.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringTestCompressor::COMPRESSION_NONE]  = array('None', 'The test result is not compressed, it applies only to the time of testing.The test result is not compressed, it applies only to the time of testing.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringTestCompressor::COMPRESSION_DAY]   = array('Day', 'The test result summarizes all tests of one day.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringTestCompressor::COMPRESSION_MONTH] = array('Month', 'The test result summarizes all tests of one month.');
 
 /**
  * Buttons

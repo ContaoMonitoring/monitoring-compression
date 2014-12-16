@@ -28,6 +28,16 @@
  */
 
 /**
+ * Fields
+ */
+$GLOBALS['TL_LANG']['tl_monitoring']['disable_auto_compression'] = array('Disable automatic compression', 'Select whether the automatic compression for this monitoring entry should be disabled.');
+
+/**
+ * Legends
+*/
+$GLOBALS['TL_LANG']['tl_monitoring']['compression_legend'] = 'Compression';
+
+/**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_monitoring']['compressAll'] = array('Compress all tests', 'Compresses the test results of all monitoring entries.');

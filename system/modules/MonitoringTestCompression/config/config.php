@@ -39,4 +39,9 @@ $GLOBALS['BE_MOD']['system']['monitoring']['compressAll'] = array('MonitoringTes
 $GLOBALS['TL_CRON']['monthly'][] = array('MonitoringTestCompressor', 'autoCompressLastMonth');
 $GLOBALS['TL_CRON']['daily'][]   = array('MonitoringTestCompressor', 'autoCompressLastDay');
 
+/**
+ * Hooks
+ */
+$GLOBALS['TL_HOOKS']['monitoringExtendTestResultOutput'][] = array('MonitoringTestCompressionImpl', 'addCompressionTypeToTestResultOutput'); 
+
 ?>
