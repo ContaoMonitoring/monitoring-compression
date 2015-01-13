@@ -1,5 +1,6 @@
 <?php
 
+use Monitoring\MonitoringCompressor;
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2014 Leo Feyer
@@ -23,30 +24,30 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'] = array('Compression type', 'The type of compression of this test result.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'] = array('Kompressionsart', 'Die Art der Kompression dieses Testergebnisses.');
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_legend'] = 'Compression';
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_legend'] = 'Kompression';
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringTestCompressor::COMPRESSION_NONE]  = array('None', 'The test result is not compressed, it applies only to the time of testing.The test result is not compressed, it applies only to the time of testing.');
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringTestCompressor::COMPRESSION_DAY]   = array('Day', 'The test result summarizes all tests of one day.');
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringTestCompressor::COMPRESSION_MONTH] = array('Month', 'The test result summarizes all tests of one month.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_NONE]  = array('Keine', 'Das Testergebnis ist nicht komprimiert, es gilt nur für den Testzeitpunkt.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_DAY]   = array('Tag', 'Das Testergebnis fasst alle Tests eines Tages zusammen.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_MONTH] = array('Monat', 'Das Testergebnis fasst alle Tests eines Monats zusammen.');
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compressOne'] = array('Compress tests', 'Compresses the test results of this monitoring entry.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressOne'] = array('Tests komprimieren', 'Komprimiert die Testergebnisse dieses Monitoring Eintrags.');
 
 ?>

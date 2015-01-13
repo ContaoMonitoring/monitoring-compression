@@ -8,7 +8,7 @@ namespace Monitoring;
 define('TL_MODE', 'BE');
 require_once '../../../initialize.php';
 
-class TestRunner extends MonitoringTestCompressor
+class TestRunner extends MonitoringCompressor
 {
 
     public function testRun(){

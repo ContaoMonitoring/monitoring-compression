@@ -23,14 +23,13 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
 /**
- * Misc messages
+ * Define name and tooltip for preferences (inactive modules)
  */
-$GLOBALS['TL_LANG']['MSC']['monitoringCompressedOne'] = 'The test results of this monitoring entry were compressed.';
-$GLOBALS['TL_LANG']['MSC']['monitoringCompressedAll'] = 'The test results of all monitoring entries were compressed.';
+$GLOBALS['TL_LANG']['MOD']['MonitoringCompression'] = 'Stellt Komponenten zur Komprimierung der Testergebnisse für das Contao Monitoring System zur Verfügung.';
 
 ?>

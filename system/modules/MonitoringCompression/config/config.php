@@ -23,13 +23,25 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
 /**
- * Define name and tooltip for preferences (inactive modules)
+ * Extend backend module (register new functions)
  */
-$GLOBALS['TL_LANG']['MOD']['MonitoringTestCompression'] = 'Provides components to compress the test results for the Contao Monitoring system.';
+$GLOBALS['BE_MOD']['system']['monitoring']['compressOne'] = array('MonitoringCompressor', 'compressOne');
+$GLOBALS['BE_MOD']['system']['monitoring']['compressAll'] = array('MonitoringCompressor', 'compressAll');
+
+/**
+ * Cron jobs for compression
+ */
+$GLOBALS['TL_CRON']['monthly'][] = array('MonitoringCompressor', 'autoCompressLastMonth');
+$GLOBALS['TL_CRON']['daily'][]   = array('MonitoringCompressor', 'autoCompressLastDay');
+
+/**
+ * Hooks
+ */
+$GLOBALS['TL_HOOKS']['monitoringExtendTestResultOutput'][] = array('MonitoringCompressionHookImpl', 'addCompressionTypeToTestResultOutput');
 
 ?>

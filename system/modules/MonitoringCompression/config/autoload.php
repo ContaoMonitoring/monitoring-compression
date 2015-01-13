@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package MonitoringTestCompression
+ * @package MonitoringCompression
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -26,6 +26,6 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'Monitoring\MonitoringTestCompressionImpl' => 'system/modules/MonitoringTestCompression/classes/MonitoringTestCompressionImpl.php',
-	'Monitoring\MonitoringTestCompressor'      => 'system/modules/MonitoringTestCompression/classes/MonitoringTestCompressor.php',
+	'Monitoring\MonitoringCompressionHookImpl' => 'system/modules/MonitoringCompression/classes/MonitoringCompressionHookImpl.php',
+	'Monitoring\MonitoringCompressor'          => 'system/modules/MonitoringCompression/classes/MonitoringCompressor.php',
 ));

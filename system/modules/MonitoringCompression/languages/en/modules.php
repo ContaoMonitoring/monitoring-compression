@@ -23,32 +23,13 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
 /**
- * Add to palette
+ * Define name and tooltip for preferences (inactive modules)
  */
-$arrDefaultPalletEntries = explode(";", $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']);
-foreach ($arrDefaultPalletEntries as $index=>$entry)
-{
-	if (strpos($entry, "{monitoring_legend}") !== FALSE)
-	{
-		$entry .= ",monitoringAutoCompressionActive";
-		$arrDefaultPalletEntries[$index] = $entry;
-	}
-}
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] = implode(";", $arrDefaultPalletEntries);
-
-/**
- * Add fields
- */
-$GLOBALS['TL_DCA']['tl_settings']['fields']['monitoringAutoCompressionActive'] = array
-(
-	'label'     => &$GLOBALS['TL_LANG']['tl_settings']['monitoringAutoCompressionActive'],
-	'inputType' => 'checkbox',
-	'eval'      => array('tl_class'=>'clr w50')
-);
+$GLOBALS['TL_LANG']['MOD']['MonitoringCompression'] = 'Provides components to compress the test results for the Contao Monitoring system.';
 
 ?>

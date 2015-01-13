@@ -23,13 +23,14 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
 /**
- * Fields
+ * Misc messages
  */
-$GLOBALS['TL_LANG']['tl_settings']['monitoringAutoCompressionActive'] = array('Activate automatic compression', 'Select if automatic compression should be active.');
+$GLOBALS['TL_LANG']['MSC']['monitoringCompressedOne'] = 'Die Testergebnisse dieses Monitoring Eintrags wurden komprimiert.';
+$GLOBALS['TL_LANG']['MSC']['monitoringCompressedAll'] = 'Die Testergebnisse aller Monitoring Einträge wurden komprimiert.';
 
 ?>

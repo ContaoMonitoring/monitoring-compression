@@ -1,6 +1,6 @@
 <?php
 
-use Monitoring\MonitoringTestCompressor;
+use Monitoring\MonitoringCompressor;
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2014 Leo Feyer
@@ -24,14 +24,14 @@ use Monitoring\MonitoringTestCompressor;
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
 /**
  * Add css for styling global operations button
  */
-$GLOBALS['TL_CSS'][] = 'system/modules/MonitoringTestCompression/assets/styles.css';
+$GLOBALS['TL_CSS'][] = 'system/modules/MonitoringCompression/assets/styles.css';
 
 /**
  * Add global operations
@@ -61,11 +61,11 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['compression_type'] = array
     'filter'                  => true,
     'sorting'                 => true,
     'inputType'               => 'select',
-    'default'                 => MonitoringTestCompressor::COMPRESSION_NONE,
-	'options'                 => array(MonitoringTestCompressor::COMPRESSION_NONE, MonitoringTestCompressor::COMPRESSION_DAY, MonitoringTestCompressor::COMPRESSION_MONTH),
+    'default'                 => MonitoringCompressor::COMPRESSION_NONE,
+	'options'                 => array(MonitoringCompressor::COMPRESSION_NONE, MonitoringCompressor::COMPRESSION_DAY, MonitoringCompressor::COMPRESSION_MONTH),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'],
 	'eval'                    => array('tl_class'=>'w50', 'readonly'=>true, 'helpwizard'=>true),
-	'sql'                     => "varchar(16) NOT NULL default '" . MonitoringTestCompressor::COMPRESSION_NONE . "'"
+	'sql'                     => "varchar(16) NOT NULL default '" . MonitoringCompressor::COMPRESSION_NONE . "'"
 );
 
 ?>

@@ -23,7 +23,7 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
@@ -33,14 +33,14 @@
 namespace Monitoring;
 
 /**
- * Class MonitoringTestCompressionImpl
+ * Class MonitoringCompressionImpl
  *
  * Implementation of hooks.
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
  * @package    Controller
  */
-class MonitoringTestCompressionImpl extends \Backend
+class MonitoringCompressionHookImpl extends \Backend
 {
 	/**
 	 * Constructor
@@ -64,7 +64,7 @@ class MonitoringTestCompressionImpl extends \Backend
 			'col_0' => $GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'][0],
 			'col_1' => $GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][$arrRow['compression_type']][0],
 		);
-		
+
 		return $arrOutputTable;
 	}
 }

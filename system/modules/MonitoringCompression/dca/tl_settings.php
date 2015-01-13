@@ -23,25 +23,32 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
 /**
- * Extend backend module (register new functions)
+ * Add to palette
  */
-$GLOBALS['BE_MOD']['system']['monitoring']['compressOne'] = array('MonitoringTestCompressor', 'compressOne');
-$GLOBALS['BE_MOD']['system']['monitoring']['compressAll'] = array('MonitoringTestCompressor', 'compressAll');
+$arrDefaultPalletEntries = explode(";", $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']);
+foreach ($arrDefaultPalletEntries as $index=>$entry)
+{
+	if (strpos($entry, "{monitoring_legend}") !== FALSE)
+	{
+		$entry .= ",monitoringAutoCompressionActive";
+		$arrDefaultPalletEntries[$index] = $entry;
+	}
+}
+$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] = implode(";", $arrDefaultPalletEntries);
 
 /**
- * Cron jobs for compression
+ * Add fields
  */
-$GLOBALS['TL_CRON']['monthly'][] = array('MonitoringTestCompressor', 'autoCompressLastMonth');
-$GLOBALS['TL_CRON']['daily'][]   = array('MonitoringTestCompressor', 'autoCompressLastDay');
-
-/**
- * Hooks
- */
-$GLOBALS['TL_HOOKS']['monitoringExtendTestResultOutput'][] = array('MonitoringTestCompressionImpl', 'addCompressionTypeToTestResultOutput'); 
+$GLOBALS['TL_DCA']['tl_settings']['fields']['monitoringAutoCompressionActive'] = array
+(
+	'label'     => &$GLOBALS['TL_LANG']['tl_settings']['monitoringAutoCompressionActive'],
+	'inputType' => 'checkbox',
+	'eval'      => array('tl_class'=>'clr w50')
+);
 
 ?>

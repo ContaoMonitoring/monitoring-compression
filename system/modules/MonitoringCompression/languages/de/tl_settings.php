@@ -23,13 +23,13 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
 /**
- * Define name and tooltip for preferences (inactive modules)
+ * Fields
  */
-$GLOBALS['TL_LANG']['MOD']['MonitoringTestCompression'] = 'Stellt Komponenten zur Komprimierung der Testergebnisse für das Contao Monitoring System zur Verfügung.';
+$GLOBALS['TL_LANG']['tl_settings']['monitoringAutoCompressionActive'] = array('Automatische Kompression aktivieren', 'Wählen Sie ob die automatische Kompression aktiviert sein soll.');
 
 ?>

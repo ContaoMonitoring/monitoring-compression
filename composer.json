@@ -1,5 +1,5 @@
 {
-	"name":"contao-monitoring/monitoring-test-compression",
+	"name":"contao-monitoring/monitoring-compression",
 	"description":"Provides components to compress the test results for the Contao Monitoring system.",
 	"keywords":["contao", "monitoring", "compress", "compression", "test result"],
 	"type":"contao-module",
@@ -13,8 +13,8 @@
 	],
 	"support":{
 		"email":"contao@cliff-parnitzky.de",
-		"issues":"https://github.com/ContaoMonitoring/monitoring-test-compression/issues",
-		"source":"https://github.com/ContaoMonitoring/monitoring-test-compression"
+		"issues":"https://github.com/ContaoMonitoring/monitoring-compression/issues",
+		"source":"https://github.com/ContaoMonitoring/monitoring-compression"
 	},
 	"require":{
 		"php":">=5.3",
@@ -25,7 +25,7 @@
 	"extra":{
 		"contao":{
 			"sources":{
-				"system/modules/MonitoringTestCompression":"system/modules/MonitoringTestCompression"
+				"system/modules/MonitoringCompression":"system/modules/MonitoringCompression"
 			}
 		},
 		"branch-alias": {

@@ -23,7 +23,7 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
@@ -41,7 +41,7 @@ use Contao\Database;
  * @author     Cliff Parnitzky
  * @package    Controller
  */
-class MonitoringTestCompressor extends \Backend
+class MonitoringCompressor extends \Backend
 {
     const COMPRESSION_NONE  = '';
     const COMPRESSION_DAY   = 'INCOMPLETE';
@@ -60,10 +60,10 @@ class MonitoringTestCompressor extends \Backend
 	 */
 	public function compressOne()
 	{
-	    // ToDo: execute cempression here
+	    //TODO: execute cempression here
 	    $time = time();
 	    $lastDay = mktime(0, 0, 0, date("m", $time), date("d", $time) - 1, date("Y", $time));
-	    $this->compressDay($lastDay, \Input::get('id'), false);
+	    $this->compressDay($lastDay, \Input::get('tid'), false);
 
 	    \Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['monitoringCompressedOne']);
 	    $this->logDebugMsg("Compressed the test results of monitoring entry with ID " . \Input::get('id'), __METHOD__);
@@ -83,7 +83,7 @@ class MonitoringTestCompressor extends \Backend
 	 */
 	public function compressAll()
 	{
-	    // ToDo: execute cempression here
+	    //TODO: execute compression here
 	    \Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['monitoringCompressedAll']);
 	    $this->logDebugMsg("Compressed the test results of all monitoring entries.", __METHOD__);
 	    $this->returnToList(\Input::get('do'));
@@ -139,24 +139,34 @@ class MonitoringTestCompressor extends \Backend
 	    }
 	    else
 	    {
-	        $arrEntryIds = $this->getAllActiveMonitoringEntries();
+	        $arrEntryIds = \MonitoringModel::findAll()->fetchEach("id");
 	    }
 
 	    foreach ($arrEntryIds as $entryId)
 	    {
-	        // if 'disable_auto_compression' of entry is set and $blnIsAutoExecuted is true ... do not compress
+	        $objMonitoringEntry = \MonitoringModel::findByPk($entryId);
 
-	        // at first compress the days
-
-	        $tstampStartOfDay = $tstampStartOfMonth;
-	        for ($i = 0; $i < $dayCountOfMonth; $i++)
+	        if ($objMonitoringEntry !== null && (!$objMonitoringEntry->disable_auto_compression || !$blnIsAutoExecuted))
 	        {
-	           $this->compressDay($tstampStartOfDay, $entryId, $blnIsScheduled);
-	           $tstampStartOfDay = $this->addOneDay($tstampStartOfDay);
-	        }
 
-	        // now compress the month
-	        $this->logDebugMsg('Compressed ' . $dayCountOfMonth . ' days at entry with ID ' . $entryId, __METHOD__);
+    	        //TODO: execute cempression here
+
+    	        // at first compress the days
+
+    	        $tstampStartOfDay = $tstampStartOfMonth;
+    	        for ($i = 0; $i < $dayCountOfMonth; $i++)
+    	        {
+    	           $this->compressDay($tstampStartOfDay, $entryId, $blnIsScheduled);
+    	           $tstampStartOfDay = $this->addOneDay($tstampStartOfDay);
+    	        }
+
+    	        // now compress the month
+    	        $this->logDebugMsg('Compressed ' . $dayCountOfMonth . ' days at entry with ID ' . $entryId, __METHOD__);
+            }
+            else
+            {
+                $this->logDebugMsg('Monitoring entry with ID ' . $entryId . ' not found or auto compression disabled.', __METHOD__);
+            }
 	    }
 
 	    $this->logDebugMsg('Compressed the test results of the month: ' . date("M Y", $tstampStartOfMonth), __METHOD__);
@@ -179,19 +189,30 @@ class MonitoringTestCompressor extends \Backend
 	    }
 	    else
 	    {
-	        $arrEntryIds = $this->getAllActiveMonitoringEntries();
+	        $arrEntryIds = \MonitoringModel::findAll()->fetchEach("id");
 	    }
 
 	    foreach ($arrEntryIds as $entryId)
 	    {
-	        $objTest = Database::getInstance()->prepare("SELECT * FROM tl_monitoring_test WHERE date >= ? AND date < ? AND type = ? AND pid = ? ORDER BY date")
-	        ->execute($tstampStartOfDay, $this->addOneDay($tstampStartOfDay), Monitoring::CHECK_TYPE_AUTOMATIC, $entryId);
+	        $objMonitoringEntry = \MonitoringModel::findByPk($entryId);
 
-	        // if 'disable_auto_compression' of entry is set and $blnIsAutoExecuted is true ... do not compress
+	        if ($objMonitoringEntry !== null && (!$objMonitoringEntry->disable_auto_compression || !$blnIsAutoExecuted))
+	        {
 
-	        // do the compression here
+    	        //TODO: execute cempression here
 
-	        //$this->logDebugMsg('Found ' . $objTest->numRows. ' automatic test results for day ' . date("d.m.Y", $tstampStartOfDay) . ' at entry with ID ' . $entryId, __METHOD__);
+    	        $objTest = \Database::getInstance()->prepare("SELECT * FROM tl_monitoring_test WHERE date >= ? AND date < ? AND type = ? AND pid = ? ORDER BY date")
+    	        ->execute($tstampStartOfDay, $this->addOneDay($tstampStartOfDay), Monitoring::CHECK_TYPE_AUTOMATIC, $entryId);
+
+    	        // do the compression here
+
+    	        //$this->logDebugMsg('Found ' . $objTest->numRows. ' automatic test results for day ' . date("d.m.Y", $tstampStartOfDay) . ' at entry with ID ' . $entryId, __METHOD__);
+
+	        }
+	        else
+            {
+                $this->logDebugMsg('Monitoring entry with ID ' . $entryId . ' not found or auto compression disabled.', __METHOD__);
+            }
 	    }
 
 	    $this->logDebugMsg('Compressed the test results of the day: ' . date("d.m.Y", $tstampStartOfDay), __METHOD__);
@@ -215,26 +236,6 @@ class MonitoringTestCompressor extends \Backend
 	    {
 	        $this->log($msg, $origin, TL_INFO);
 	    }
-	}
-
-	/**
-	 * Returns the ids of all active monitoring entries.
-	 *
-	 * @return array An assoc array of the ids.
-	 */
-	private function getAllActiveMonitoringEntries()
-	{
-	    $strSelect = "SELECT id FROM tl_monitoring";
-
-	    if ($GLOBALS['TL_CONFIG']['monitoringDebugMode'] === FALSE)
-	    {
-	        $strSelect .= " WHERE disable = ''";
-	    }
-
-	    $objId = Database::getInstance()->prepare($strSelect)
-	                                    ->execute();
-
-	    return $objId->fetchEach("id");
 	}
 
 	/**

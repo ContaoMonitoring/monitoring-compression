@@ -23,14 +23,14 @@
  * PHP version 5
  * @copyright  Cliff Parnitzky 2014
  * @author     Cliff Parnitzky
- * @package    MonitoringTestCompression
+ * @package    MonitoringCompression
  * @license    LGPL
  */
 
 /**
  * Add css for styling global operations button
  */
-$GLOBALS['TL_CSS'][] = 'system/modules/MonitoringTestCompression/assets/styles.css';
+$GLOBALS['TL_CSS'][] = 'system/modules/MonitoringCompression/assets/styles.css';
 
 /**
  * Add global operations
