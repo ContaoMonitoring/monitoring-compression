@@ -2,6 +2,6 @@
 Contao Extension "MonitoringCompression"
 ========================================
 
-Version 1.0.0 (2015-01-xx)
+Version 1.0.0 (201x-xx-xx)
 --------------------------
 - Initial version
