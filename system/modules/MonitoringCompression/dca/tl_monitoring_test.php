@@ -62,10 +62,10 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['compression_type'] = array
     'sorting'                 => true,
     'inputType'               => 'select',
     'default'                 => MonitoringCompressor::COMPRESSION_NONE,
-	'options'                 => array(MonitoringCompressor::COMPRESSION_NONE, MonitoringCompressor::COMPRESSION_DAY, MonitoringCompressor::COMPRESSION_MONTH),
-	'reference'               => &$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'],
-	'eval'                    => array('tl_class'=>'w50', 'readonly'=>true, 'helpwizard'=>true),
-	'sql'                     => "varchar(16) NOT NULL default '" . MonitoringCompressor::COMPRESSION_NONE . "'"
+    'options'                 => array(MonitoringCompressor::COMPRESSION_NONE, MonitoringCompressor::COMPRESSION_DAY, MonitoringCompressor::COMPRESSION_MONTH, MonitoringCompressor::COMPRESSION_IMPOSSIBLE),
+    'reference'               => &$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'],
+    'eval'                    => array('tl_class'=>'w50', 'readonly'=>true, 'helpwizard'=>true),
+    'sql'                     => "varchar(16) NOT NULL default '" . MonitoringCompressor::COMPRESSION_NONE . "'"
 );
 
 ?>
