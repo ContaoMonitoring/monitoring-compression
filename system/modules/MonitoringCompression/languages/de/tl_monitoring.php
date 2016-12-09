@@ -30,16 +30,17 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_monitoring']['disable_auto_compression'] = array('Automatische Kompression deaktivieren', 'Wählen Sie ob die automatische Kompression für diesen Monitoring Eintrag deaktiviert werden soll.');
+$GLOBALS['TL_LANG']['tl_monitoring']['disable_auto_compression'] = array('Automatische Komprimierung deaktivieren', 'Wählen Sie ob die automatische Komprimierung für diesen Monitoring Eintrag deaktiviert werden soll.');
 
 /**
  * Legends
 */
-$GLOBALS['TL_LANG']['tl_monitoring']['compression_legend'] = 'Kompression';
+$GLOBALS['TL_LANG']['tl_monitoring']['compression_legend'] = 'Komprimierung';
 
 /**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_monitoring']['compressAll'] = array('Alle Tests komprimieren', 'Komprimiert die Testergebnisse aller Monitoring Einträge.');
+$GLOBALS['TL_LANG']['tl_monitoring']['compressOne'] = array('Tests komprimieren', 'Komprimiert die Testergebnisse des Monitoring Eintrags mit der ID %s.');
 
 ?>

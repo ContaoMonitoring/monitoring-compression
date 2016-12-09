@@ -41,5 +41,6 @@ $GLOBALS['TL_LANG']['tl_monitoring']['compression_legend'] = 'Compression';
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_monitoring']['compressAll'] = array('Compress all tests', 'Compresses the test results of all monitoring entries.');
+$GLOBALS['TL_LANG']['tl_monitoring']['compressOne'] = array('Compress tests', 'Compresses the test results of monitoring entry with ID %s.');
 
 ?>
