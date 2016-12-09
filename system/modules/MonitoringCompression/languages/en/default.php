@@ -30,7 +30,7 @@
 /**
  * Misc messages
  */
-$GLOBALS['TL_LANG']['MSC']['monitoringCompressedOne'] = 'The test results of this monitoring entry were compressed.';
+$GLOBALS['TL_LANG']['MSC']['monitoringCompressedOne'] = 'The test results of monitoring entry with ID %s were compressed.';
 $GLOBALS['TL_LANG']['MSC']['monitoringCompressedAll'] = 'The test results of all monitoring entries were compressed.';
 
 ?>
