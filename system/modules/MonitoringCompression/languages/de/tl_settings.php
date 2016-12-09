@@ -30,6 +30,6 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_settings']['monitoringAutoCompressionActive'] = array('Automatische Kompression aktivieren', 'Wählen Sie ob die automatische Kompression aktiviert sein soll.');
+$GLOBALS['TL_LANG']['tl_settings']['monitoringAutoCompressionActive'] = array('Automatische Komprimierung aktivieren', 'Wählen Sie ob die automatische Komprimierung aktiviert sein soll.');
 
 ?>
