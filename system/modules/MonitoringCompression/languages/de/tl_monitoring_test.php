@@ -31,19 +31,20 @@ use Monitoring\MonitoringCompressor;
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'] = array('Kompressionsart', 'Die Art der Kompression dieses Testergebnisses.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'] = array('Komprimierungsart', 'Die Art der Komprimierung dieses Testergebnisses.');
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_legend'] = 'Kompression';
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_legend'] = 'Komprimierung';
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_NONE]  = array('Keine', 'Das Testergebnis ist nicht komprimiert, es gilt nur für den Testzeitpunkt.');
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_DAY]   = array('Tag', 'Das Testergebnis fasst alle Tests eines Tages zusammen.');
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_MONTH] = array('Monat', 'Das Testergebnis fasst alle Tests eines Monats zusammen.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_NONE]       = array('Keine', 'Das Testergebnis ist nicht komprimiert, es gilt nur für den Testzeitpunkt.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_DAY]        = array('Tag', 'Das Testergebnis fasst alle Tests eines Tages zusammen.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_MONTH]      = array('Monat', 'Das Testergebnis fasst alle Tests eines Monats zusammen.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_IMPOSSIBLE] = array('Unmöglich', 'Das Testergebnis kann nicht zusammengefasst werden, weil nicht alle Testergebnisse des selben Tages den gleichen Status haben.');
 
 /**
  * Buttons
