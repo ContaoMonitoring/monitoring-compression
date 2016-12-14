@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2014 Leo Feyer
+ * Copyright (C) 2005-2016 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2014
+ * @copyright  Cliff Parnitzky 2016-2016
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -37,7 +37,7 @@ use Contao\Database;
  * Class Monitoring
  *
  * Read the text from the given url and compare with test string.
- * @copyright  Cliff Parnitzky 2014
+ * @copyright  Cliff Parnitzky 2016-2016
  * @author     Cliff Parnitzky
  * @package    Controller
  */
@@ -45,7 +45,6 @@ class MonitoringCompressor extends \Backend
 {
     const COMPRESSION_NONE       = '';
     const COMPRESSION_DAY        = 'DAY';
-    const COMPRESSION_MONTH      = 'MONTH';
     const COMPRESSION_IMPOSSIBLE = 'IMPOSSIBLE';
 
   /**
@@ -104,21 +103,6 @@ class MonitoringCompressor extends \Backend
       $this->compressDay($this->getLastDay());
       $this->log('Automatically compressed the test results of the last day.', __METHOD__, TL_CRON);
     }
-  }
-
-  /**
-   * Automatically (CRON triggered) compresses the test results of the last month.
-   */
-  public function autoCompressLastMonth()
-  {
-      if ($GLOBALS['TL_CONFIG']['monitoringAutoCompressionActive'] === TRUE)
-      {
-          $time = time();
-          $lastMonth = mktime(0, 0, 0, date("m", $time) - 1, 1, date("Y", $time));
-          // TODO add function
-          //$this->compressMonth($lastMonth);
-          //$this->log('Automatically compressed the test results of the last month.', __METHOD__, TL_CRON);
-      }
   }
 
   /**
@@ -236,61 +220,6 @@ class MonitoringCompressor extends \Backend
   }
 
   /**
-   * Compresses the test results of the month starting at given timestamp.
-   *
-   * @param $tstampStartOfMonth The timestamp of the start of the month.
-   * @param $intEntryId The id of a monitoring entry (if null, the test results of all entries will be compressed).
-   * @param $blnIsAutoExecuted Specifies whether the method is triggered by an automatic process (e.g. CRON).
-   */
-  private function compressMonth($tstampStartOfMonth, $intEntryId=null, $blnIsAutoExecuted=true)
-  {
-      // TODO add function
-      $dayCountOfMonth = date("t", $tstampStartOfMonth);
-
-      $this->logDebugMsg('Compressing ' . $dayCountOfMonth . ' days', __METHOD__);
-
-      $arrEntryIds = array();
-
-      if (is_int($intEntryId))
-      {
-          $arrEntryIds[] = $intEntryId;
-      }
-      else
-      {
-          $arrEntryIds = \MonitoringModel::findAll()->fetchEach("id");
-      }
-
-      foreach ($arrEntryIds as $entryId)
-      {
-          $objMonitoringEntry = \MonitoringModel::findByPk($entryId);
-
-          if ($objMonitoringEntry !== null && (!$objMonitoringEntry->disable_auto_compression || !$blnIsAutoExecuted))
-          {
-
-              //TODO: execute compression here
-
-              // at first compress the days
-
-              $tstampStartOfDay = $tstampStartOfMonth;
-              for ($i = 0; $i < $dayCountOfMonth; $i++)
-              {
-                 $this->compressDay($tstampStartOfDay, $entryId, $blnIsAutoExecuted);
-                 $tstampStartOfDay = $this->addOneDay($tstampStartOfDay);
-              }
-
-              // now compress the month
-              $this->logDebugMsg('Compressed ' . $dayCountOfMonth . ' days at entry with ID ' . $entryId, __METHOD__);
-            }
-            else
-            {
-                $this->logDebugMsg('Monitoring entry with ID ' . $entryId . ' not found or auto compression disabled.', __METHOD__);
-            }
-      }
-
-      $this->logDebugMsg('Compressed the test results of the month: ' . date("M Y", $tstampStartOfMonth), __METHOD__);
-  }
-
-  /**
    * Redirect to the list.
    */
   private function returnToList($act)
@@ -341,17 +270,6 @@ class MonitoringCompressor extends \Backend
   private function subOneDay($tstamp)
   {
     return mktime(0, 0, 0, date("m", $tstamp), date("d", $tstamp) - 1, date("Y", $tstamp));
-  }
-
-  /**
-   * Increases the given timestamp by one month.
-   *
-   * @param int $tstamp The timestamp which should be increased.
-   * @return int The increased timestamp.
-   */
-  private function addOneMonth($tstamp)
-  {
-    return mktime(0, 0, 0, date("m", $tstamp) + 1, date("d", $tstamp), date("Y", $tstamp));
   }
 }
 

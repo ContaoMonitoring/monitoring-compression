@@ -3,7 +3,7 @@
 use Monitoring\MonitoringCompressor;
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2014 Leo Feyer
+ * Copyright (C) 2005-2016 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -22,7 +22,7 @@ use Monitoring\MonitoringCompressor;
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2014
+ * @copyright  Cliff Parnitzky 2016-2016
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -62,7 +62,7 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['compression_type'] = array
     'sorting'                 => true,
     'inputType'               => 'select',
     'default'                 => MonitoringCompressor::COMPRESSION_NONE,
-    'options'                 => array(MonitoringCompressor::COMPRESSION_NONE, MonitoringCompressor::COMPRESSION_DAY, MonitoringCompressor::COMPRESSION_MONTH, MonitoringCompressor::COMPRESSION_IMPOSSIBLE),
+    'options'                 => array(MonitoringCompressor::COMPRESSION_NONE, MonitoringCompressor::COMPRESSION_DAY, MonitoringCompressor::COMPRESSION_IMPOSSIBLE),
     'reference'               => &$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'],
     'eval'                    => array('tl_class'=>'w50', 'readonly'=>true, 'helpwizard'=>true),
     'sql'                     => "varchar(16) NOT NULL default '" . MonitoringCompressor::COMPRESSION_NONE . "'"
