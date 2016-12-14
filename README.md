@@ -10,6 +10,7 @@ Provides components to compress the test results for the [[Contao Monitoring]](h
 Features:
 
 - compress all hourly test results of a day to one (if the status is the same)
+- compress all daily test results of a month to one (if the status is the same)
 - enable automatic compression in system settings (triggered via external CRON)
 - disable automatic compression for individual monitoring entries
 - compress all or individual monitoring entries via backend manually

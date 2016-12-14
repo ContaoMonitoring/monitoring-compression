@@ -37,6 +37,7 @@ $GLOBALS['BE_MOD']['system']['monitoring']['compressAll'] = array('MonitoringCom
  * Cron jobs for compression
  */
 $GLOBALS['TL_CRON']['daily'][]   = array('MonitoringCompressor', 'autoCompressLastDay');
+$GLOBALS['TL_CRON']['monthly'][] = array('MonitoringCompressor', 'autoCompressLastMonth');
 
 /**
  * Hooks

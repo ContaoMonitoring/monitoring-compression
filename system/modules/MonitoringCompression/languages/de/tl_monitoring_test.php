@@ -22,7 +22,7 @@ use Monitoring\MonitoringCompressor;
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2016
+ * @copyright  Cliff Parnitzky 2016-2016
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -43,6 +43,7 @@ $GLOBALS['TL_LANG']['tl_monitoring_test']['compression_legend'] = 'Komprimierung
  */
 $GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_NONE]       = array('Keine', 'Das Testergebnis ist nicht komprimiert, es gilt nur für den Testzeitpunkt.');
 $GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_DAY]        = array('Tag', 'Das Testergebnis fasst alle Tests eines Tages zusammen.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_MONTH]      = array('Monat', 'Das Testergebnis fasst alle Tests eines Monats zusammen.');
 $GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_IMPOSSIBLE] = array('Unmöglich', 'Das Testergebnis kann nicht zusammengefasst werden, weil nicht alle Testergebnisse des selben Tages den gleichen Status haben.');
 
 /**

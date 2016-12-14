@@ -42,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_monitoring_test']['compression_legend'] = 'Compression';
  */
 $GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_NONE]       = array('None', 'The test result is not compressed, it applies only to the time of testing.The test result is not compressed, it applies only to the time of testing.');
 $GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_DAY]        = array('Day', 'The test result summarizes all tests of one day.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_MONTH]      = array('Month', 'The test result summarizes all tests of one month.');
 $GLOBALS['TL_LANG']['tl_monitoring_test']['compressionTypes'][MonitoringCompressor::COMPRESSION_IMPOSSIBLE] = array('Impossible', 'The test result could not be compressed, because not all test results of the same day have the same status.');
 
 /**
