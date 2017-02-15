@@ -19,9 +19,9 @@ Features:
 Installation
 ------------
 
-The extension is not published in contao extension repository.
+Install the extension via composer: [contao-monitoring/monitoring-compression](https://packagist.org/packages/contao-monitoring/monitoring-compression).
 
-Install it manually or via composer: [contao-monitoring/monitoring-compression](https://packagist.org/packages/contao-monitoring/monitoring-compression).
+If you prefer to install it manually, download the latest release here: https://github.com/ContaoMonitoring/monitoring-compression/releases
 
 
 Tracker
@@ -41,4 +41,5 @@ Dependency
 ----------
 
 This extension is dependent on the following extensions:
+
 - [[contao-monitoring/monitoring]](https://packagist.org/packages/contao-monitoring/monitoring)
