@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2016 Leo Feyer
+ * Copyright (C) 2005-2017 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2016-2016
+ * @copyright  Cliff Parnitzky 2016-2017
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -33,11 +33,11 @@
 $arrDefaultPalletEntries = explode(";", $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']);
 foreach ($arrDefaultPalletEntries as $index=>$entry)
 {
-	if (strpos($entry, "{monitoring_legend}") !== FALSE)
-	{
-		$entry .= ",monitoringAutoCompressionActive";
-		$arrDefaultPalletEntries[$index] = $entry;
-	}
+  if (strpos($entry, "{monitoring_legend}") !== FALSE)
+  {
+    $entry .= ",monitoringAutoCompressionActive,monitoringCompressionResponseTimeCombination";
+    $arrDefaultPalletEntries[$index] = $entry;
+  }
 }
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] = implode(";", $arrDefaultPalletEntries);
 
@@ -46,9 +46,17 @@ $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] = implode(";", $arrDefa
  */
 $GLOBALS['TL_DCA']['tl_settings']['fields']['monitoringAutoCompressionActive'] = array
 (
-	'label'     => &$GLOBALS['TL_LANG']['tl_settings']['monitoringAutoCompressionActive'],
-	'inputType' => 'checkbox',
-	'eval'      => array('tl_class'=>'clr w50')
+  'label'     => &$GLOBALS['TL_LANG']['tl_settings']['monitoringAutoCompressionActive'],
+  'inputType' => 'checkbox',
+  'eval'      => array('tl_class'=>'clr w50 m12')
+);
+$GLOBALS['TL_DCA']['tl_settings']['fields']['monitoringCompressionResponseTimeCombination'] = array
+(
+  'label'     => &$GLOBALS['TL_LANG']['tl_settings']['monitoringCompressionResponseTimeCombination'],
+  'inputType' => 'select',
+  'options'   => array('average', 'lowest', 'highest'),
+  'reference' => &$GLOBALS['TL_LANG']['tl_settings']['monitoringCompressionResponseTimeCombinationOptions'],
+  'eval'      => array('mandatory'=>true, 'tl_class'=>'w50', 'includeBlankOption'=>true)
 );
 
 ?>
