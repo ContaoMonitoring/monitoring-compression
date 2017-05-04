@@ -23,6 +23,8 @@ Install the extension via composer: [contao-monitoring/monitoring-compression](h
 
 If you prefer to install it manually, download the latest release here: https://github.com/ContaoMonitoring/monitoring-compression/releases
 
+After installation update the database and define Monitoring specific values in the system settings.
+
 
 Tracker
 -------
