@@ -199,8 +199,8 @@ class MonitoringCompressor extends \Backend
               {
                 switch ($GLOBALS['TL_CONFIG']['monitoringCompressionResponseTimeCombination'])
                 {
-                  case 'lowest'  : min($arrResponseTimes); break;
-                  case 'highest' : max($arrResponseTimes); break;
+                  case 'lowest'  : $responseTime = min($arrResponseTimes); break;
+                  case 'highest' : $responseTime = max($arrResponseTimes); break;
                   default        : $responseTime = round(array_sum($arrResponseTimes) / count($arrResponseTimes), 3);
                 }
               }
