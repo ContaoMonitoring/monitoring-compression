@@ -65,7 +65,7 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_time_combination'] 
   'inputType'               => 'select',
   'options'                 => array(MonitoringCompressor::RESPONSE_TIME_COMBINATION_AVERAGE, MonitoringCompressor::RESPONSE_TIME_COMBINATION_LOWEST, MonitoringCompressor::RESPONSE_TIME_COMBINATION_HIGHEST),
   'reference'               => &$GLOBALS['TL_LANG']['MSC']['monitoringCompressionResponseTimeCombinationOptions'],
-  'eval'                    => array('tl_class'=>'w50', 'readonly' => true),
+  'eval'                    => array('tl_class'=>'w50', 'readonly' => true, 'includeBlankOption'=>true),
   'sql'                     => "varchar(16) NOT NULL default ''"
 );
 
