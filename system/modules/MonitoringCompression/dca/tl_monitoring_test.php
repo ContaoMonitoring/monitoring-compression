@@ -1,6 +1,5 @@
 <?php
 
-use Monitoring\MonitoringCompressor;
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2016 Leo Feyer
@@ -34,6 +33,11 @@ use Monitoring\MonitoringCompressor;
 $GLOBALS['TL_CSS'][] = 'system/modules/MonitoringCompression/assets/styles.css';
 
 /**
+ * Add callback
+ */
+$GLOBALS['TL_DCA']['tl_monitoring_test']['config']['onload_callback'][] = array('tl_monitoring_test_MonitoringCompression', 'initPalettes');
+
+/**
  * Add global operations
  */
 array_insert($GLOBALS['TL_DCA']['tl_monitoring_test']['list']['global_operations'], count($GLOBALS['TL_DCA']['tl_monitoring_test']['list']['global_operations']) - 1, array
@@ -54,6 +58,44 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default'] .= ";{compressio
 /**
  * Add fields
  */
+$GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_time_combination'] = array
+(
+  'label'                   => &$GLOBALS['TL_LANG']['tl_monitoring_test']['response_time_combination'],
+  'exclude'                 => true,
+  'inputType'               => 'select',
+  'options'                 => array(MonitoringCompressor::RESPONSE_TIME_COMBINATION_AVERAGE, MonitoringCompressor::RESPONSE_TIME_COMBINATION_LOWEST, MonitoringCompressor::RESPONSE_TIME_COMBINATION_HIGHEST),
+  'reference'               => &$GLOBALS['TL_LANG']['MSC']['monitoringCompressionResponseTimeCombinationOptions'],
+  'eval'                    => array('tl_class'=>'w50', 'readonly' => true, 'includeBlankOption'=>true),
+  'sql'                     => "varchar(16) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_times'] = array
+(
+  'label'                   => &$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times'],
+  'exclude'                 => true,
+  'inputType'               => 'multiColumnWizard',
+  'eval'                    => array
+  (
+    'tl_class'     => 'clr',
+    'buttons'      => array('up' => false, 'down' => false, 'copy' => false, 'delete' => false), 
+    'columnFields' => array
+    (
+      'date' => array
+      (
+        'label'         => &$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times_date'],
+        'inputType'     => 'text',
+        'eval'          => array('rgxp' => 'datim', 'readonly' => true)
+      ),
+      'responseTime' => array
+      (
+        'label'         => &$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times_time'],
+        'inputType'     => 'text',
+        'eval'          => array('rgxp'=>'digit', 'readonly' => true)
+      )
+    ) 
+  ),
+  'sql'                     => "blob NULL"
+);
 $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['compression_type'] = array
 (
     'label'                   => &$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'],
@@ -67,5 +109,42 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['compression_type'] = array
     'eval'                    => array('tl_class'=>'w50', 'readonly'=>true, 'helpwizard'=>true),
     'sql'                     => "varchar(16) NOT NULL default '" . MonitoringCompressor::COMPRESSION_NONE . "'"
 );
+
+/**
+ * Class tl_monitoring_test_MonitoringCompression
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * PHP version 5
+ * @copyright  Cliff Parnitzky 2017-2017
+ * @author     Cliff Parnitzky
+ * @package    Controller
+ */
+class tl_monitoring_test_MonitoringCompression extends Backend
+{
+  /**
+   * Default constructor
+   */
+  public function __construct()
+  {
+    parent::__construct();
+  }
+
+  /**
+   * Initialize the palettes when loading
+   * @param \DataContainer
+   */
+  public function initPalettes()
+  {
+    if (\Input::get('act') == "edit")
+    {
+      $objMonitoringTest = \MonitoringTestModel::findByPk(\Input::get('id'));
+      if ($objMonitoringTest != null && $objMonitoringTest->compression_type == MonitoringCompressor::COMPRESSION_DAY)
+      {
+        $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_time']['eval']['tl_class'] = $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_time']['eval']['tl_class'] . " clr";
+        $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default'] = str_replace(",response_time,", ",response_time,response_time_combination,response_times,", $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default']);
+      }
+    }
+  }
+}
 
 ?>

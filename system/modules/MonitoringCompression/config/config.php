@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2016 Leo Feyer
+ * Copyright (C) 2005-2017 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2016-2016
+ * @copyright  Cliff Parnitzky 2016-2017
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -30,8 +30,8 @@
 /**
  * Extend backend module (register new functions)
  */
-$GLOBALS['BE_MOD']['system']['monitoring']['compressOne'] = array('MonitoringCompressor', 'compressOne');
-$GLOBALS['BE_MOD']['system']['monitoring']['compressAll'] = array('MonitoringCompressor', 'compressAll');
+$GLOBALS['BE_MOD']['ContaoMonitoring']['monitoring']['compressOne'] = array('MonitoringCompressor', 'compressOne');
+$GLOBALS['BE_MOD']['ContaoMonitoring']['monitoring']['compressAll'] = array('MonitoringCompressor', 'compressAll');
 
 /**
  * Cron jobs for compression

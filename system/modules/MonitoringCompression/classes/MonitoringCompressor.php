@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2016 Leo Feyer
+ * Copyright (C) 2005-2017 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2016-2016
+ * @copyright  Cliff Parnitzky 2016-2017
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -32,7 +32,6 @@
  */
 namespace Monitoring;
 
-use Contao\Database;
 /**
  * Class Monitoring
  *
@@ -43,9 +42,13 @@ use Contao\Database;
  */
 class MonitoringCompressor extends \Backend
 {
-    const COMPRESSION_NONE       = '';
-    const COMPRESSION_DAY        = 'DAY';
-    const COMPRESSION_IMPOSSIBLE = 'IMPOSSIBLE';
+  const COMPRESSION_NONE       = '';
+  const COMPRESSION_DAY        = 'DAY';
+  const COMPRESSION_IMPOSSIBLE = 'IMPOSSIBLE';
+
+  const RESPONSE_TIME_COMBINATION_AVERAGE = 'average';
+  const RESPONSE_TIME_COMBINATION_LOWEST  = 'lowest';
+  const RESPONSE_TIME_COMBINATION_HIGHEST = 'highest';
 
   /**
    * Constructor
@@ -162,13 +165,13 @@ class MonitoringCompressor extends \Backend
                                              ->execute($tstampStartOfDay, $this->addOneDay($tstampStartOfDay), MonitoringCompressor::COMPRESSION_NONE, $objMonitoringEntries->id);
 
           $this->logDebugMsg('Found ' . $objTest->numRows . ' test results for day ' . date("d.m.Y", $tstampStartOfDay) . ' at entry with ID ' . $objMonitoringEntries->id, __METHOD__);
-          // TODO remove after testing
-          //log_message('Found ' . $objTest->numRows . ' test results for day ' . date("d.m.Y", $tstampStartOfDay) . ' at entry with ID ' . $objMonitoringEntries->id, 'monitoring_compression.log'); 
 
           if ($objTest->numRows > 0)
           {
             $arrDeleteIds = array();
             $arrComments = array();
+            $arrResponseTimes = array();
+            $arrResponseTimesForDb = array();
             $blnEachStatusEqual = true;
 
             // get the first entry
@@ -177,7 +180,12 @@ class MonitoringCompressor extends \Backend
             // remember data of the first entry
             $intFirstId = $objTest->id;
             $strFirstStatus = $objTest->status;
-            $arrComments[] = $objTest->comment;
+            if (!empty($objTest->comment))
+            {
+              $arrComments[] = $objTest->comment;
+            }
+            $arrResponseTimes[] = $objTest->response_time;
+            $arrResponseTimesForDb[] = array('date' => $objTest->date, 'responseTime' => $objTest->response_time);
             
             while ($objTest->next())
             {
@@ -186,13 +194,35 @@ class MonitoringCompressor extends \Backend
                 $blnEachStatusEqual = false;
               }
               $arrDeleteIds[] = $objTest->id;
-              $arrComments[] = $objTest->comment;
+              if (!empty($objTest->comment))
+              {
+                $arrComments[] = $objTest->comment;
+              }
+              $arrResponseTimes[] = $objTest->response_time;
+              $arrResponseTimesForDb[] = array('date' => $objTest->date, 'responseTime' => $objTest->response_time);
             }
 
             if ($blnEachStatusEqual)
             {
-              \Database::getInstance()->prepare("UPDATE tl_monitoring_test SET compression_type = ?, comment = ? WHERE id = ?")
-                                      ->execute(MonitoringCompressor::COMPRESSION_DAY, implode("\n\n", $arrComments), $intFirstId);
+              $responseTime = 0;
+              $responseTimeCombination = \Config::get('monitoringCompressionResponseTimeCombination');
+              if (empty($responseTimeCombination))
+              {
+                $responseTimeCombination = MonitoringCompressor::RESPONSE_TIME_COMBINATION_AVERAGE;
+              }
+              
+              if (!empty($arrResponseTimes))
+              {
+                switch ($responseTimeCombination)
+                {
+                  case MonitoringCompressor::RESPONSE_TIME_COMBINATION_LOWEST  : $responseTime = min($arrResponseTimes); break;
+                  case MonitoringCompressor::RESPONSE_TIME_COMBINATION_HIGHEST : $responseTime = max($arrResponseTimes); break;
+                  default                                                      : $responseTime = round(array_sum($arrResponseTimes) / count($arrResponseTimes), 3);
+                }
+              }
+              
+              \Database::getInstance()->prepare("UPDATE tl_monitoring_test SET compression_type = ?, comment = ?, response_time = ?, response_time_combination = ?, response_times = ? WHERE id = ?")
+                                      ->execute(MonitoringCompressor::COMPRESSION_DAY, implode("\n\n", $arrComments), $responseTime, $responseTimeCombination, serialize($arrResponseTimesForDb), $intFirstId);
 
               if (!empty($arrDeleteIds))
               {

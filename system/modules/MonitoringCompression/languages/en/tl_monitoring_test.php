@@ -30,7 +30,11 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'] = array('Compression type', 'The type of compression of this test result.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['response_time_combination'] = array('Combination of response times', 'The value of the response times that was taken over into the compressed test result.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times']            = array('Antwortzeiten', 'All response times of this compressed test result.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times_date']       = array('Date / time', 'Time stamp of the test.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times_time']       = array('Response time', 'The response time at this time.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type']          = array('Compression type', 'The type of compression of this test result.');
 
 /**
  * Legends

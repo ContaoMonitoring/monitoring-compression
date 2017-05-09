@@ -1,6 +1,5 @@
 <?php
 
-use Monitoring\MonitoringCompressor;
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2016 Leo Feyer
@@ -31,7 +30,11 @@ use Monitoring\MonitoringCompressor;
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'] = array('Komprimierungsart', 'Die Art der Komprimierung dieses Testergebnisses.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['response_time_combination'] = array('Antwortzeit Zusammenfassung', 'Der Wert der Antwortzeiten, welcher in das komprimierte Testergebnis übernommen wurde.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times']            = array('Antwortzeiten', 'Alle Antwortzeiten diese komprimierten Testergebnisses.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times_date']       = array('Datum / Uhrzeit', 'Zeitstempel des Tests.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times_time']       = array('Antwortzeit', 'Die Antwortzeit zu diesem Zeitpunkt.');
+$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type']          = array('Komprimierungsart', 'Die Art der Komprimierung dieses Testergebnisses.');
 
 /**
  * Legends
