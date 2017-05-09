@@ -1,6 +1,5 @@
 <?php
 
-use Monitoring\MonitoringCompressor;
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2016 Leo Feyer
@@ -59,6 +58,17 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default'] .= ";{compressio
 /**
  * Add fields
  */
+$GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_time_combination'] = array
+(
+  'label'                   => &$GLOBALS['TL_LANG']['tl_monitoring_test']['response_time_combination'],
+  'exclude'                 => true,
+  'inputType'               => 'select',
+  'options'                 => array(MonitoringCompressor::RESPONSE_TIME_COMBINATION_AVERAGE, MonitoringCompressor::RESPONSE_TIME_COMBINATION_LOWEST, MonitoringCompressor::RESPONSE_TIME_COMBINATION_HIGHEST),
+  'reference'               => &$GLOBALS['TL_LANG']['MSC']['monitoringCompressionResponseTimeCombinationOptions'],
+  'eval'                    => array('tl_class'=>'w50', 'readonly' => true),
+  'sql'                     => "varchar(16) NOT NULL default ''"
+);
+
 $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_times'] = array
 (
   'label'                   => &$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times'],
@@ -72,13 +82,13 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_times'] = array
     (
       'date' => array
       (
-        'label'         => &$GLOBALS['TL_LANG']['tl_settings']['monitoringAdditionalInfoFieldsCategory'],
+        'label'         => &$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times_date'],
         'inputType'     => 'text',
         'eval'          => array('rgxp' => 'datim', 'readonly' => true)
       ),
       'responseTime' => array
       (
-        'label'         => &$GLOBALS['TL_LANG']['tl_settings']['monitoringAdditionalInfoFieldsName'],
+        'label'         => &$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times_time'],
         'inputType'     => 'text',
         'eval'          => array('rgxp'=>'digit', 'readonly' => true)
       )
@@ -112,7 +122,7 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['compression_type'] = array
 class tl_monitoring_test_MonitoringCompression extends Backend
 {
   /**
-   * Import the back end user object
+   * Default constructor
    */
   public function __construct()
   {
@@ -130,7 +140,8 @@ class tl_monitoring_test_MonitoringCompression extends Backend
       $objMonitoringTest = \MonitoringTestModel::findByPk(\Input::get('id'));
       if ($objMonitoringTest != null && $objMonitoringTest->compression_type == MonitoringCompressor::COMPRESSION_DAY)
       {
-        $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default'] = str_replace(",response_time,", ",response_time,response_times,", $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default']);
+        $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_time']['eval']['tl_class'] = $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_time']['eval']['tl_class'] . " clr";
+        $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default'] = str_replace(",response_time,", ",response_time,response_time_combination,response_times,", $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default']);
       }
     }
   }

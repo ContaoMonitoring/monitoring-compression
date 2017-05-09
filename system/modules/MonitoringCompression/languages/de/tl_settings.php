@@ -31,13 +31,6 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_settings']['monitoringAutoCompressionActive']              = array('Automatische Komprimierung aktivieren', 'Wählen Sie ob die automatische Komprimierung aktiviert sein soll.');
-$GLOBALS['TL_LANG']['tl_settings']['monitoringCompressionResponseTimeCombination'] = array('Antwortzeit Zusammenfassung', 'Wählen Sie welcher Wert der Antwortzeiten in das komprimierte Testergebnis übernommen werden soll.');
-
-/**
- * Options
- */
-$GLOBALS['TL_LANG']['tl_settings']['monitoringCompressionResponseTimeCombinationOptions']['average'] = 'Durchschnittswert';
-$GLOBALS['TL_LANG']['tl_settings']['monitoringCompressionResponseTimeCombinationOptions']['lowest']  = 'Kleinster Wert';
-$GLOBALS['TL_LANG']['tl_settings']['monitoringCompressionResponseTimeCombinationOptions']['highest'] = 'Höchster Wert';
+$GLOBALS['TL_LANG']['tl_settings']['monitoringCompressionResponseTimeCombination'] = array('Antwortzeiten Zusammenfassung', 'Wählen Sie welcher Wert der Antwortzeiten in das komprimierte Testergebnis übernommen werden soll.');
 
 ?>

@@ -32,7 +32,6 @@
  */
 namespace Monitoring;
 
-use Contao\Database;
 /**
  * Class Monitoring
  *
@@ -43,9 +42,13 @@ use Contao\Database;
  */
 class MonitoringCompressor extends \Backend
 {
-    const COMPRESSION_NONE       = '';
-    const COMPRESSION_DAY        = 'DAY';
-    const COMPRESSION_IMPOSSIBLE = 'IMPOSSIBLE';
+  const COMPRESSION_NONE       = '';
+  const COMPRESSION_DAY        = 'DAY';
+  const COMPRESSION_IMPOSSIBLE = 'IMPOSSIBLE';
+
+  const RESPONSE_TIME_COMBINATION_AVERAGE = 'average';
+  const RESPONSE_TIME_COMBINATION_LOWEST  = 'lowest';
+  const RESPONSE_TIME_COMBINATION_HIGHEST = 'highest';
 
   /**
    * Constructor
@@ -162,8 +165,6 @@ class MonitoringCompressor extends \Backend
                                              ->execute($tstampStartOfDay, $this->addOneDay($tstampStartOfDay), MonitoringCompressor::COMPRESSION_NONE, $objMonitoringEntries->id);
 
           $this->logDebugMsg('Found ' . $objTest->numRows . ' test results for day ' . date("d.m.Y", $tstampStartOfDay) . ' at entry with ID ' . $objMonitoringEntries->id, __METHOD__);
-          // TODO remove after testing
-          //log_message('Found ' . $objTest->numRows . ' test results for day ' . date("d.m.Y", $tstampStartOfDay) . ' at entry with ID ' . $objMonitoringEntries->id, 'monitoring_compression.log'); 
 
           if ($objTest->numRows > 0)
           {
@@ -204,18 +205,24 @@ class MonitoringCompressor extends \Backend
             if ($blnEachStatusEqual)
             {
               $responseTime = 0;
+              $responseTimeCombination = \Config::get('monitoringCompressionResponseTimeCombination');
+              if (empty($responseTimeCombination))
+              {
+                $responseTimeCombination = MonitoringCompressor::RESPONSE_TIME_COMBINATION_AVERAGE;
+              }
+              
               if (!empty($arrResponseTimes))
               {
-                switch ($GLOBALS['TL_CONFIG']['monitoringCompressionResponseTimeCombination'])
+                switch ($responseTimeCombination)
                 {
-                  case 'lowest'  : $responseTime = min($arrResponseTimes); break;
-                  case 'highest' : $responseTime = max($arrResponseTimes); break;
-                  default        : $responseTime = round(array_sum($arrResponseTimes) / count($arrResponseTimes), 3);
+                  case MonitoringCompressor::RESPONSE_TIME_COMBINATION_LOWEST  : $responseTime = min($arrResponseTimes); break;
+                  case MonitoringCompressor::RESPONSE_TIME_COMBINATION_HIGHEST : $responseTime = max($arrResponseTimes); break;
+                  default                                                      : $responseTime = round(array_sum($arrResponseTimes) / count($arrResponseTimes), 3);
                 }
               }
               
-              \Database::getInstance()->prepare("UPDATE tl_monitoring_test SET compression_type = ?, comment = ?, response_time = ?, response_times = ? WHERE id = ?")
-                                      ->execute(MonitoringCompressor::COMPRESSION_DAY, implode("\n\n", $arrComments), $responseTime, serialize($arrResponseTimesForDb), $intFirstId);
+              \Database::getInstance()->prepare("UPDATE tl_monitoring_test SET compression_type = ?, comment = ?, response_time = ?, response_time_combination = ?, response_times = ? WHERE id = ?")
+                                      ->execute(MonitoringCompressor::COMPRESSION_DAY, implode("\n\n", $arrComments), $responseTime, $responseTimeCombination, serialize($arrResponseTimesForDb), $intFirstId);
 
               if (!empty($arrDeleteIds))
               {

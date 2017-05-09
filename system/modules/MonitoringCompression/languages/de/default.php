@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2016 Leo Feyer
+ * Copyright (C) 2005-2017 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2016-2016
+ * @copyright  Cliff Parnitzky 2016-2017
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -32,5 +32,12 @@
  */
 $GLOBALS['TL_LANG']['MSC']['monitoringCompressedOne'] = 'Die Testergebnisse des Monitoring Eintrags mit der ID %s wurden komprimiert.';
 $GLOBALS['TL_LANG']['MSC']['monitoringCompressedAll'] = 'Die Testergebnisse aller Monitoring Einträge wurden komprimiert.';
+
+/**
+ * Options
+ */
+$GLOBALS['TL_LANG']['MSC']['monitoringCompressionResponseTimeCombinationOptions'][MonitoringCompressor::RESPONSE_TIME_COMBINATION_AVERAGE] = 'Durchschnittswert';
+$GLOBALS['TL_LANG']['MSC']['monitoringCompressionResponseTimeCombinationOptions'][MonitoringCompressor::RESPONSE_TIME_COMBINATION_LOWEST]  = 'Kleinster Wert';
+$GLOBALS['TL_LANG']['MSC']['monitoringCompressionResponseTimeCombinationOptions'][MonitoringCompressor::RESPONSE_TIME_COMBINATION_HIGHEST] = 'Höchster Wert';
 
 ?>

@@ -54,8 +54,8 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['monitoringCompressionResponseTimeCo
 (
   'label'     => &$GLOBALS['TL_LANG']['tl_settings']['monitoringCompressionResponseTimeCombination'],
   'inputType' => 'select',
-  'options'   => array('average', 'lowest', 'highest'),
-  'reference' => &$GLOBALS['TL_LANG']['tl_settings']['monitoringCompressionResponseTimeCombinationOptions'],
+  'options'   => array(MonitoringCompressor::RESPONSE_TIME_COMBINATION_AVERAGE, MonitoringCompressor::RESPONSE_TIME_COMBINATION_LOWEST, MonitoringCompressor::RESPONSE_TIME_COMBINATION_HIGHEST),
+  'reference' => &$GLOBALS['TL_LANG']['MSC']['monitoringCompressionResponseTimeCombinationOptions'],
   'eval'      => array('mandatory'=>true, 'tl_class'=>'w50', 'includeBlankOption'=>true)
 );
 
