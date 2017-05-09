@@ -34,6 +34,11 @@ use Monitoring\MonitoringCompressor;
 $GLOBALS['TL_CSS'][] = 'system/modules/MonitoringCompression/assets/styles.css';
 
 /**
+ * Add callback
+ */
+$GLOBALS['TL_DCA']['tl_monitoring_test']['config']['onload_callback'][] = array('tl_monitoring_test_MonitoringCompression', 'initPalettes');
+
+/**
  * Add global operations
  */
 array_insert($GLOBALS['TL_DCA']['tl_monitoring_test']['list']['global_operations'], count($GLOBALS['TL_DCA']['tl_monitoring_test']['list']['global_operations']) - 1, array
@@ -54,6 +59,33 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default'] .= ";{compressio
 /**
  * Add fields
  */
+$GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['response_times'] = array
+(
+  'label'                   => &$GLOBALS['TL_LANG']['tl_monitoring_test']['response_times'],
+  'exclude'                 => true,
+  'inputType'               => 'multiColumnWizard',
+  'eval'                    => array
+  (
+    'tl_class'     => 'clr',
+    'buttons'      => array('up' => false, 'down' => false, 'copy' => false, 'delete' => false), 
+    'columnFields' => array
+    (
+      'date' => array
+      (
+        'label'         => &$GLOBALS['TL_LANG']['tl_settings']['monitoringAdditionalInfoFieldsCategory'],
+        'inputType'     => 'text',
+        'eval'          => array('rgxp' => 'datim', 'readonly' => true)
+      ),
+      'responseTime' => array
+      (
+        'label'         => &$GLOBALS['TL_LANG']['tl_settings']['monitoringAdditionalInfoFieldsName'],
+        'inputType'     => 'text',
+        'eval'          => array('rgxp'=>'digit', 'readonly' => true)
+      )
+    ) 
+  ),
+  'sql'                     => "blob NULL"
+);
 $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['compression_type'] = array
 (
     'label'                   => &$GLOBALS['TL_LANG']['tl_monitoring_test']['compression_type'],
@@ -67,5 +99,41 @@ $GLOBALS['TL_DCA']['tl_monitoring_test']['fields']['compression_type'] = array
     'eval'                    => array('tl_class'=>'w50', 'readonly'=>true, 'helpwizard'=>true),
     'sql'                     => "varchar(16) NOT NULL default '" . MonitoringCompressor::COMPRESSION_NONE . "'"
 );
+
+/**
+ * Class tl_monitoring_test_MonitoringCompression
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * PHP version 5
+ * @copyright  Cliff Parnitzky 2017-2017
+ * @author     Cliff Parnitzky
+ * @package    Controller
+ */
+class tl_monitoring_test_MonitoringCompression extends Backend
+{
+  /**
+   * Import the back end user object
+   */
+  public function __construct()
+  {
+    parent::__construct();
+  }
+
+  /**
+   * Initialize the palettes when loading
+   * @param \DataContainer
+   */
+  public function initPalettes()
+  {
+    if (\Input::get('act') == "edit")
+    {
+      $objMonitoringTest = \MonitoringTestModel::findByPk(\Input::get('id'));
+      if ($objMonitoringTest != null && $objMonitoringTest->compression_type == MonitoringCompressor::COMPRESSION_DAY)
+      {
+        $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default'] = str_replace(",response_time,", ",response_time,response_times,", $GLOBALS['TL_DCA']['tl_monitoring_test']['palettes']['default']);
+      }
+    }
+  }
+}
 
 ?>

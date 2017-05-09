@@ -170,6 +170,7 @@ class MonitoringCompressor extends \Backend
             $arrDeleteIds = array();
             $arrComments = array();
             $arrResponseTimes = array();
+            $arrResponseTimesForDb = array();
             $blnEachStatusEqual = true;
 
             // get the first entry
@@ -180,6 +181,7 @@ class MonitoringCompressor extends \Backend
             $strFirstStatus = $objTest->status;
             $arrComments[] = $objTest->comment;
             $arrResponseTimes[] = $objTest->response_time;
+            $arrResponseTimesForDb[] = array('date' => $objTest->date, 'responseTime' => $objTest->response_time);
             
             while ($objTest->next())
             {
@@ -190,6 +192,7 @@ class MonitoringCompressor extends \Backend
               $arrDeleteIds[] = $objTest->id;
               $arrComments[] = $objTest->comment;
               $arrResponseTimes[] = $objTest->response_time;
+              $arrResponseTimesForDb[] = array('date' => $objTest->date, 'responseTime' => $objTest->response_time);
             }
 
             if ($blnEachStatusEqual)
@@ -205,8 +208,8 @@ class MonitoringCompressor extends \Backend
                 }
               }
               
-              \Database::getInstance()->prepare("UPDATE tl_monitoring_test SET compression_type = ?, comment = ?, response_time = ? WHERE id = ?")
-                                      ->execute(MonitoringCompressor::COMPRESSION_DAY, implode("\n\n", $arrComments), $responseTime, $intFirstId);
+              \Database::getInstance()->prepare("UPDATE tl_monitoring_test SET compression_type = ?, comment = ?, response_time = ?, response_times WHERE id = ?")
+                                      ->execute(MonitoringCompressor::COMPRESSION_DAY, implode("\n\n", $arrComments), $responseTime, serialize($arrResponseTimesForDb), $intFirstId);
 
               if (!empty($arrDeleteIds))
               {
