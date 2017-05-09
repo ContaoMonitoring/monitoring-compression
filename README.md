@@ -45,3 +45,4 @@ Dependency
 This extension is dependent on the following extensions:
 
 - [[contao-monitoring/monitoring]](https://packagist.org/packages/contao-monitoring/monitoring)
+- [[menatwork/contao-multicolumnwizard]](https://packagist.org/packages/menatwork/contao-multicolumnwizard)
