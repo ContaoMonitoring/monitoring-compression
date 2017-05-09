@@ -2,10 +2,10 @@
 Contao Extension "MonitoringCompression"
 ========================================
 
-Version 1.1.0 (2017-05-xx)
+Version 1.1.0 (2017-05-09)
 --------------------------
 - added handling of response times
-- moved `Contao Mmonitoring` to own backend group
+- moved `Contao Monitoring` to own backend group
 
 Version 1.0.0 (2016-12-14)
 --------------------------
