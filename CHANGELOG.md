@@ -2,6 +2,10 @@
 Contao Extension "MonitoringCompression"
 ========================================
 
+Version 1.1.1 (2017-06-28)
+--------------------------
+- Contao 4 ready
+
 Version 1.1.0 (2017-05-09)
 --------------------------
 - added handling of response times
