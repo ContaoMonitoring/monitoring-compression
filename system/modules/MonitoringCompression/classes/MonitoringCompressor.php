@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2017 Leo Feyer
+ * Copyright (C) 2005-2018 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2016-2017
+ * @copyright  Cliff Parnitzky 2016-2018
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -33,10 +33,10 @@
 namespace Monitoring;
 
 /**
- * Class Monitoring
+ * Class MonitoringCompressor
  *
- * Read the text from the given url and compare with test string.
- * @copyright  Cliff Parnitzky 2016-2016
+ * Compress the test results.
+ * @copyright  Cliff Parnitzky 2016-2018
  * @author     Cliff Parnitzky
  * @package    Controller
  */
@@ -59,7 +59,7 @@ class MonitoringCompressor extends \Backend
   }
 
   /**
-   * Executes a check
+   * Executes a singl compression
    */
   public function compressOne()
   {
@@ -79,7 +79,7 @@ class MonitoringCompressor extends \Backend
   }
 
   /**
-   * Check all monitoring entries
+   * Compress the test results of all monitoring entries
    */
   public function compressAll()
   {
