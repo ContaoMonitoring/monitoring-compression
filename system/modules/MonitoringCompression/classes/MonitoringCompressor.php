@@ -265,7 +265,7 @@ class MonitoringCompressor extends \Backend
   {
     if ($GLOBALS['TL_CONFIG']['monitoringDebugMode'] === TRUE)
     {
-      $this->log($msg, $origin, TL_INFO);
+      $this->log($msg, $origin, TL_GENERAL);
     }
   }
 

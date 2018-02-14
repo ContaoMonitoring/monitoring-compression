@@ -2,6 +2,10 @@
 Contao Extension "MonitoringCompression"
 ========================================
 
+Version 1.1.2 (2018-xx-xx)
+--------------------------
+- Fixes error with logging in debug mode
+
 Version 1.1.1 (2017-06-28)
 --------------------------
 - Contao 4 ready
