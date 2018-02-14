@@ -83,10 +83,9 @@ class MonitoringCompressor extends \Backend
    */
   public function compressAll()
   {
-      $arrMonitoringEntryIds = \MonitoringModel::findAll()->fetchEach("id");
-      foreach ($arrMonitoringEntryIds as $intMonitoringEntryId)
+      $objMonitoringEntries = \MonitoringModel::findAll();
+      foreach ($objMonitoringEntries as $objMonitoringEntry)
       {
-        $objMonitoringEntry = \MonitoringModel::findByPk($intMonitoringEntryId);
         $this->compressMonitoringEntry($objMonitoringEntry);
       }
 
