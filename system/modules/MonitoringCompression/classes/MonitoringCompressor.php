@@ -101,7 +101,7 @@ class MonitoringCompressor extends \Backend
    */
   public function autoCompressLastDay()
   {
-    if ($GLOBALS['TL_CONFIG']['monitoringAutoCompressionActive'] === TRUE)
+    if (\Config::get('monitoringAutoCompressionActive') === TRUE)
     {
       $this->compressDay($this->getLastDay());
       $this->log('Automatically compressed the test results of the last day.', __METHOD__, TL_CRON);
@@ -263,7 +263,7 @@ class MonitoringCompressor extends \Backend
    */
   private function logDebugMsg($msg, $origin)
   {
-    if ($GLOBALS['TL_CONFIG']['monitoringDebugMode'] === TRUE)
+    if (\Config::get('monitoringDebugMode') === TRUE)
     {
       $this->log($msg, $origin, TL_GENERAL);
     }

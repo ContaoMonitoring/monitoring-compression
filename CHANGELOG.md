@@ -4,7 +4,8 @@ Contao Extension "MonitoringCompression"
 
 Version 1.1.2 (2018-xx-xx)
 --------------------------
-- Fixes error with logging in debug mode
+- fixed error with logging in debug mode
+- replaced `$GLOBALS['TL_CONFIG']` access with `\Config::get()`
 
 Version 1.1.1 (2017-06-28)
 --------------------------
