@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2018 Leo Feyer
+ * Copyright (C) 2005-2019 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2016-2018
+ * @copyright  Cliff Parnitzky 2016-2019
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -36,7 +36,7 @@ namespace Monitoring;
  * Class MonitoringCompressor
  *
  * Compress the test results.
- * @copyright  Cliff Parnitzky 2016-2018
+ * @copyright  Cliff Parnitzky 2016-2019
  * @author     Cliff Parnitzky
  * @package    Controller
  */
@@ -204,10 +204,18 @@ class MonitoringCompressor extends \Backend
             if ($blnEachStatusEqual)
             {
               $responseTime = 0;
-              $responseTimeCombination = \Config::get('monitoringCompressionResponseTimeCombination');
+              
+              // use deviating value from monitored entry
+              $responseTimeCombination = $objMonitoringEntries->response_time_combination;
               if (empty($responseTimeCombination))
               {
-                $responseTimeCombination = MonitoringCompressor::RESPONSE_TIME_COMBINATION_AVERAGE;
+                // use system setting
+                $responseTimeCombination = \Config::get('monitoringCompressionResponseTimeCombination');
+                if (empty($responseTimeCombination))
+                {
+                  // use default
+                  $responseTimeCombination = MonitoringCompressor::RESPONSE_TIME_COMBINATION_AVERAGE;
+                }
               }
               
               if (!empty($arrResponseTimes))

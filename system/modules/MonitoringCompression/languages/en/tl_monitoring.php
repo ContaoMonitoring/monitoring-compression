@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2016 Leo Feyer
+ * Copyright (C) 2005-2019 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2016-2016
+ * @copyright  Cliff Parnitzky 2016-2019
  * @author     Cliff Parnitzky
  * @package    MonitoringCompression
  * @license    LGPL
@@ -30,7 +30,8 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_monitoring']['disable_auto_compression'] = array('Disable automatic compression', 'Select whether the automatic compression for this monitoring entry should be disabled.');
+$GLOBALS['TL_LANG']['tl_monitoring']['disable_auto_compression']  = array('Disable automatic compression', 'Select whether the automatic compression for this monitoring entry should be disabled.');
+$GLOBALS['TL_LANG']['tl_monitoring']['response_time_combination'] = array('Combination of response times', 'Select which value of the response times, deviating from the system setting, should be taken over into the compressed test result.');
 
 /**
  * Legends
