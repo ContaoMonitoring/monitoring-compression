@@ -4,7 +4,7 @@
 	"keywords":["contao", "monitoring", "compress", "compression", "test result"],
 	"type":"contao-module",
 	"homepage":"https://github.com/ContaoMonitoring/monitoring-compression",
-	"license":"LGPL-3.0+",
+	"license":"LGPL-3.0-or-later",
 	"authors":[
 		{
 			"name":"Cliff Parnitzky",
@@ -31,7 +31,7 @@
 			}
 		},
 		"branch-alias": {
-			"dev-master": "1.1.x-dev"
+			"dev-master": "1.2.x-dev"
 		}
 	}
 }

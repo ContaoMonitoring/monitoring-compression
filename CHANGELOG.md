@@ -2,6 +2,10 @@
 Contao Extension "MonitoringCompression"
 ========================================
 
+Version 1.2.0 (2019-11-12)
+--------------------------
+- added defining a deviating "Combination of response times" per monitoring entry (see #3)
+
 Version 1.1.2 (2018-02-15)
 --------------------------
 - fixed error with logging in debug mode
